@@ -36,13 +36,38 @@ export default function LoginScreen({ navigation }) {
 
     setLoading(true);
     try {
-      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const payload = isLogin
-        ? { email: form.email, password: form.password }
-        : { name: form.name, email: form.email, password: form.password, role: form.role, phone: form.phone };
+      if (isLogin) {
+        // ── LOGIN ──
+        const { data } = await api.post('/api/auth/login', {
+          email: form.email,
+          password: form.password,
+        });
+        await login(data.user, data.token);
+      } else {
+        // ── REGISTER ──
+        await api.post('/api/auth/register', {
+          name: form.name,
+          email: form.email,
+          password: form.password,
+          role: form.role,
+          phone: form.phone,
+        });
 
-      const { data } = await api.post(endpoint, payload);
-      await login(data.user, data.token);
+        // Show success, reset form, and go to login
+        Alert.alert(
+          '🎉 Account Created!',
+          'Your account has been created successfully. Please sign in to continue.',
+          [
+            {
+              text: 'Sign In Now',
+              onPress: () => {
+                setForm({ name: '', email: form.email, password: '', role: 'tourist', phone: '' });
+                setIsLogin(true);
+              },
+            },
+          ]
+        );
+      }
     } catch (err) {
       const msg = err.response?.data?.error || 'Connection failed. Is the server running?';
       Alert.alert('Error', msg);
@@ -128,7 +153,9 @@ export default function LoginScreen({ navigation }) {
               {loading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
-                <Text style={styles.submitBtnText}>{isLogin ? 'Sign In' : 'Create Account'}</Text>
+                <Text style={styles.submitBtnText}>
+                  {isLogin ? '🔓 Sign In' : '🚀 Create Account'}
+                </Text>
               )}
             </TouchableOpacity>
 
