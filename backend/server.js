@@ -34,7 +34,7 @@ app.use('/api/bookings', bookingRoutes);
 // Socket logic
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
-  
+
   socket.on('join', (userId) => {
     socket.join(userId);
     console.log(`User ${userId} joined room`);
@@ -51,9 +51,9 @@ io.on('connection', (socket) => {
 });
 
 // MongoDB Connection Mock
-// mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(() => console.log('MongoDB Connected'))
-//   .catch(err => console.log(err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
