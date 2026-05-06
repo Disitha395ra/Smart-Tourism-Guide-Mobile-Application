@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { createBooking } = require('../controllers/booking.controller');
+const { createBooking, getMyBookings, getGuideBookings, updateBookingStatus } = require('../controllers/booking.controller');
+const auth = require('../middleware/auth.middleware');
 
-// Dummy auth middleware for demo purposes
-const authMiddleware = (req, res, next) => {
-  req.user = { id: 'dummyUserId123' }; // In real app, extract from JWT
-  next();
-};
-
-router.post('/', authMiddleware, createBooking);
+router.post('/', auth, createBooking);
+router.get('/my', auth, getMyBookings);
+router.get('/guide', auth, getGuideBookings);
+router.put('/:id/status', auth, updateBookingStatus);
 
 module.exports = router;
