@@ -130,22 +130,17 @@ export default function GuidesScreen({ navigation }) {
       </View>
 
       {/* Language filter */}
-      <FlatList
-        data={LANGUAGES}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={item => item}
-        style={styles.langFilter}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
-        renderItem={({ item }) => (
+      <View style={styles.langFilterContainer}>
+        {LANGUAGES.map(item => (
           <TouchableOpacity
+            key={item}
             style={[styles.langBtn, selectedLang === item && styles.langBtnActive]}
             onPress={() => setSelectedLang(item)}
           >
             <Text style={[styles.langBtnText, selectedLang === item && styles.langBtnTextActive]}>{item}</Text>
           </TouchableOpacity>
-        )}
-      />
+        ))}
+      </View>
 
       {loading ? (
         <ActivityIndicator style={{ marginTop: 40 }} size="large" color={COLORS.primary} />
@@ -177,8 +172,8 @@ const styles = StyleSheet.create({
   pageSubtitle: { fontSize: 13, color: COLORS.gray, marginTop: 2 },
   searchBox: { flexDirection: 'row', backgroundColor: COLORS.white, marginHorizontal: 16, marginBottom: 12, borderRadius: 14, paddingHorizontal: 14, paddingVertical: 12, alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 8, elevation: 3, gap: 8 },
   searchInput: { flex: 1, fontSize: 15, color: COLORS.text },
-  langFilter: { marginBottom: 12 },
-  langBtn: { backgroundColor: COLORS.white, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6, marginRight: 8, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 },
+  langFilterContainer: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 16, marginBottom: 12 },
+  langBtn: { backgroundColor: COLORS.white, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 },
   langBtnActive: { backgroundColor: COLORS.primary },
   langBtnText: { fontSize: 12, color: COLORS.gray, fontWeight: '600' },
   langBtnTextActive: { color: COLORS.white },

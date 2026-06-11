@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, Image, ScrollView, TouchableOpacity,
-  SafeAreaView, Alert, ActivityIndicator
+  SafeAreaView, Alert, ActivityIndicator, Linking
 } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
 
@@ -97,13 +98,43 @@ export default function AttractionDetailScreen({ route, navigation }) {
                 </>
               )}
 
+              {attraction.location?.coordinates && (
+                <View style={styles.mapContainer}>
+                  <Text style={styles.sectionTitle}>Location Map</Text>
+                  <MapView 
+                    style={styles.map}
+                    initialRegion={{
+                      latitude: attraction.location.coordinates.latitude,
+                      longitude: attraction.location.coordinates.longitude,
+                      latitudeDelta: 0.05,
+                      longitudeDelta: 0.05,
+                    }}
+                  >
+                    <Marker 
+                      coordinate={{
+                        latitude: attraction.location.coordinates.latitude,
+                        longitude: attraction.location.coordinates.longitude,
+                      }}
+                      title={attraction.name}
+                    />
+                  </MapView>
+                </View>
+              )}
+
               {/* Navigate Button */}
               <TouchableOpacity
                 style={styles.navigateBtn}
-                onPress={() => Alert.alert('Navigation', 'Google Maps integration will open here.\n\nFor now, please add your Google Maps API key to enable this feature.')}
+                onPress={() => {
+                  if (attraction.location?.coordinates) {
+                    const url = `https://www.google.com/maps/search/?api=1&query=${attraction.location.coordinates.latitude},${attraction.location.coordinates.longitude}`;
+                    Linking.openURL(url);
+                  } else {
+                    Alert.alert('Error', 'Coordinates not available for this attraction.');
+                  }
+                }}
               >
                 <Ionicons name="navigate" size={18} color={COLORS.white} />
-                <Text style={styles.navigateBtnText}>Get Directions</Text>
+                <Text style={styles.navigateBtnText}>Open in Google Maps</Text>
               </TouchableOpacity>
             </>
           )}
@@ -169,4 +200,6 @@ const styles = StyleSheet.create({
   findGuidesBtnText: { color: COLORS.white, fontSize: 15, fontWeight: '800' },
   reviewsTab: { padding: 20, alignItems: 'center' },
   noReviews: { color: COLORS.gray, fontSize: 14, textAlign: 'center' },
+  mapContainer: { marginTop: 10 },
+  map: { width: '100%', height: 200, borderRadius: 12, marginTop: 8 },
 });

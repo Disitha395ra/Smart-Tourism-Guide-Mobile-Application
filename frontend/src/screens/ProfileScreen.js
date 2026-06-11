@@ -128,6 +128,22 @@ export default function ProfileScreen({ navigation }) {
           </View>
         </View>
 
+        {/* Admin Dashboard */}
+        {user?.role === 'admin' && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>⚙️ Administration</Text>
+            <TouchableOpacity style={styles.menuRow} onPress={() => navigation.navigate('AdminDashboard')}>
+              <View style={styles.menuLeft}>
+                <View style={[styles.menuIconBox, { backgroundColor: '#FFFBE6' }]}>
+                  <Ionicons name="shield-checkmark" size={18} color={COLORS.gold} />
+                </View>
+                <Text style={styles.menuLabel}>Admin Dashboard</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={COLORS.gray} />
+            </TouchableOpacity>
+          </View>
+        )}
+
         {/* Menu */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>📋 Menu</Text>

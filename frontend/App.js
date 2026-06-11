@@ -18,6 +18,7 @@ import AttractionDetailScreen from './src/screens/AttractionDetailScreen';
 import GuideDetailScreen from './src/screens/GuideDetailScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import ConversationsScreen from './src/screens/ConversationsScreen';
+import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -114,6 +115,11 @@ function AppNavigator() {
             <Stack.Screen
               name="Conversations"
               component={ConversationsScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AdminDashboard"
+              component={AdminDashboardScreen}
               options={{ headerShown: false }}
             />
           </>

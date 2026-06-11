@@ -16,7 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //   Use: http://localhost:5000
 // ─────────────────────────────────────────────────────────────────
 
-export const BASE_URL = 'http://192.168.1.67:5000'; // ← Physical phone (Expo Go)
+export const BASE_URL = 'http://172.20.10.2:5000'; // ← Physical phone (Expo Go)
 // export const BASE_URL = 'http://10.0.2.2:5000';  // ← Android Emulator
 // export const BASE_URL = 'http://localhost:5000';  // ← iOS Simulator / Web
 
