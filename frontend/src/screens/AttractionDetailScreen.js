@@ -3,9 +3,9 @@ import {
   View, Text, StyleSheet, Image, ScrollView, TouchableOpacity,
   SafeAreaView, Alert, ActivityIndicator, Linking
 } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
+import MapComponent from '../components/MapComponent';
 
 const COLORS = {
   primary: '#0077B6', secondary: '#023E8A', accent: '#00B4D8',
@@ -101,7 +101,7 @@ export default function AttractionDetailScreen({ route, navigation }) {
               {attraction.location?.coordinates && (
                 <View style={styles.mapContainer}>
                   <Text style={styles.sectionTitle}>Location Map</Text>
-                  <MapView 
+                  <MapComponent 
                     style={styles.map}
                     initialRegion={{
                       latitude: attraction.location.coordinates.latitude,
@@ -109,15 +109,12 @@ export default function AttractionDetailScreen({ route, navigation }) {
                       latitudeDelta: 0.05,
                       longitudeDelta: 0.05,
                     }}
-                  >
-                    <Marker 
-                      coordinate={{
-                        latitude: attraction.location.coordinates.latitude,
-                        longitude: attraction.location.coordinates.longitude,
-                      }}
-                      title={attraction.name}
-                    />
-                  </MapView>
+                    coordinate={{
+                      latitude: attraction.location.coordinates.latitude,
+                      longitude: attraction.location.coordinates.longitude,
+                    }}
+                    title={attraction.name}
+                  />
                 </View>
               )}
 
