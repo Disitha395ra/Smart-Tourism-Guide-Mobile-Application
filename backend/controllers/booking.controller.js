@@ -26,7 +26,7 @@ exports.createBooking = async (req, res) => {
 
     // Notify guide via socket
     if (req.io) {
-      req.io.to(guideId.toString()).emit('new_booking_request', {
+      req.io.to(guide.userId.toString()).emit('new_booking_request', {
         bookingId: newBooking._id,
         touristId,
         date,
