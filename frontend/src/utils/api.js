@@ -16,9 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //   Use: http://localhost:5000
 // ─────────────────────────────────────────────────────────────────
 
-export const BASE_URL = 'http://192.168.1.88:5000'; // ← Physical phone (Expo Go)
-// export const BASE_URL = 'http://10.0.2.2:5000';  // ← Android Emulator
-// export const BASE_URL = 'http://localhost:5000';  // ← iOS Simulator / Web
+export const BASE_URL = 'https://smart-tourism-guide-mobile-application.onrender.com';
 
 const api = axios.create({
   baseURL: BASE_URL,
