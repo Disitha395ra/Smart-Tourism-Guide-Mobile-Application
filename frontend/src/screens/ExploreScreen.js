@@ -18,16 +18,7 @@ const CATEGORIES = [
   { id: 'adventure', label: 'Adventure' }, { id: 'culture', label: 'Culture' },
 ];
 
-const FALLBACK = [
-  { name: 'Sigiriya Rock Fortress', location: { city: 'Dambulla' }, images: ['https://images.unsplash.com/photo-1588598198321-179be400a400?w=800'], rating: 4.9, category: 'history', description: 'An ancient rock fortress and palace ruin in central Sri Lanka.' },
-  { name: 'Temple of the Tooth', location: { city: 'Kandy' }, images: ['https://images.unsplash.com/photo-1625739958742-1e967a57eb0f?w=800'], rating: 4.8, category: 'religious', description: 'The sacred Buddhist temple housing the relic of the tooth of the Buddha.' },
-  { name: 'Yala National Park', location: { city: 'Tissamaharama' }, images: ['https://images.unsplash.com/photo-1612025890978-c3c7d54e6e78?w=800'], rating: 4.7, category: 'wildlife', description: 'Famous for leopards, elephants, and diverse bird species.' },
-  { name: 'Galle Fort', location: { city: 'Galle' }, images: ['https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800'], rating: 4.6, category: 'history', description: 'A UNESCO Dutch colonial fort on the southwest coast.' },
-  { name: 'Nine Arch Bridge', location: { city: 'Ella' }, images: ['https://images.unsplash.com/photo-1568454537842-d933259bb258?w=800'], rating: 4.8, category: 'nature', description: 'Iconic colonial railway bridge built entirely of brick and stone.' },
-  { name: 'Mirissa Beach', location: { city: 'Mirissa' }, images: ['https://images.unsplash.com/photo-1590377503702-4f5c89be8955?w=800'], rating: 4.5, category: 'beach', description: 'Beautiful crescent beach famous for whale watching and surfing.' },
-  { name: 'Horton Plains', location: { city: 'Nuwara Eliya' }, images: ['https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=800'], rating: 4.7, category: 'nature', description: 'A plateau with grasslands, forests, and the famous World\'s End cliff.' },
-  { name: 'Arugam Bay', location: { city: 'Ampara' }, images: ['https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800'], rating: 4.6, category: 'beach', description: 'World-class surfing destination on Sri Lanka\'s east coast.' },
-];
+
 
 export default function ExploreScreen({ navigation }) {
   const [attractions, setAttractions] = useState([]);
@@ -42,9 +33,9 @@ export default function ExploreScreen({ navigation }) {
   const fetchAttractions = async () => {
     try {
       const { data } = await api.get('/api/attractions');
-      setAttractions(data.length > 0 ? data : FALLBACK);
-    } catch {
-      setAttractions(FALLBACK);
+      setAttractions(data);
+    } catch (err) {
+      console.log('Error fetching explore data:', err);
     } finally {
       setLoading(false);
     }

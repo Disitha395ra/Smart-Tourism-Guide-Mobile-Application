@@ -40,9 +40,7 @@ export default function HomeScreen({ navigation }) {
       setAttractions(attRes.data);
       setGuides(guideRes.data);
     } catch (err) {
-      // Use offline fallback data
-      setAttractions(FALLBACK_ATTRACTIONS);
-      setGuides([]);
+      console.log('Error fetching home data:', err);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -213,14 +211,7 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
-const FALLBACK_ATTRACTIONS = [
-  { name: 'Sigiriya Rock Fortress', location: { city: 'Dambulla' }, images: ['https://images.unsplash.com/photo-1588598198321-179be400a400?w=800'], rating: 4.9, category: 'history' },
-  { name: 'Temple of the Tooth', location: { city: 'Kandy' }, images: ['https://images.unsplash.com/photo-1625739958742-1e967a57eb0f?w=800'], rating: 4.8, category: 'religious' },
-  { name: 'Yala National Park', location: { city: 'Tissamaharama' }, images: ['https://images.unsplash.com/photo-1612025890978-c3c7d54e6e78?w=800'], rating: 4.7, category: 'wildlife' },
-  { name: 'Galle Fort', location: { city: 'Galle' }, images: ['https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800'], rating: 4.6, category: 'history' },
-  { name: 'Nine Arch Bridge', location: { city: 'Ella' }, images: ['https://images.unsplash.com/photo-1568454537842-d933259bb258?w=800'], rating: 4.8, category: 'nature' },
-  { name: 'Mirissa Beach', location: { city: 'Mirissa' }, images: ['https://images.unsplash.com/photo-1590377503702-4f5c89be8955?w=800'], rating: 4.5, category: 'beach' },
-];
+
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.bg },
