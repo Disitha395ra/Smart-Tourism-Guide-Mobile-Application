@@ -27,6 +27,11 @@
           "resizeMode": "contain"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c7f0c925-c2d3-4f15-a19c-59c06277159c"
+      }
+    }
   }
 }
