@@ -16,7 +16,12 @@
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundColor": "#0077B6"
       },
-      "package": "com.smarttour.app"
+      "package": "com.smarttour.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDXRP-9qulnhm13TjdG6fRMCRgBGNj7XwY"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
