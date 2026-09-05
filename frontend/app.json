@@ -6,12 +6,14 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "icon": "./assets/images/icon.png",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.smarttour.app"
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundColor": "#0077B6"
       },
       "package": "com.smarttour.app"
@@ -23,6 +25,7 @@
       [
         "expo-splash-screen",
         {
+          "image": "./assets/images/splash-icon.png",
           "backgroundColor": "#0077B6",
           "resizeMode": "contain"
         }
